@@ -4,7 +4,7 @@
 
 [Benjamin Dopplinger](https://github.com/benasocj) first started this repo as a way to be able to schedule pausing and unpausing his [Launtel](https://launtel.net.au) internet service through a simple Python script.
 
-[Lachlan MacPhee](https://github.com/lachlanmacphee) (me) became the maintainer of this repo in 2025 as Ben had moved on from Launtel and was busy with other things. I was interested in adding some functionality for changing speed plans and handling multiple services through the one script.
+[Lachlan MacPhee](https://github.com/lachlanmacphee) (me) became the maintainer of this repo in 2025 as Ben had moved on from using Launtel as his ISP and was busy with other things. I was interested in adding some functionality for changing speed plans and handling multiple services through the one script.
 
 ## How do I use this?
 
