@@ -144,8 +144,10 @@ if __name__ == "__main__":
         speed_choices = soup.find_all("span", class_="list-group-item")
         for choice in speed_choices:
             col_values = choice.find_all("div", class_="col-sm-4")
+            plan_name = col_values[0].text.strip()
+            price = col_values[2].text.strip() if len(col_values) > 2 else "N/A"
             logging.info(
-                str(choice.get("data-value")) + ": " + col_values[0].text.strip()
+                str(choice.get("data-value")) + ": " + plan_name + " - " + price
             )
         chosen_service_locid = soup.find("input", {"name": "locid"}).get("value")
         if args.psid is not None:
