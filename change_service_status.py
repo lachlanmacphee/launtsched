@@ -31,6 +31,13 @@ def parse_args():
         required=False,
         type=int,
     )
+    parser.add_argument(
+        "--psid",
+        metavar="psid",
+        help="plan speed id for non-interactive plan changes (only used with `plan` action)",
+        required=False,
+        type=int,
+    )
     return parser.parse_args()
 
 
@@ -141,11 +148,14 @@ if __name__ == "__main__":
                 str(choice.get("data-value")) + ": " + col_values[0].text.strip()
             )
         chosen_service_locid = soup.find("input", {"name": "locid"}).get("value")
-        try:
-            chosen_psid = int(input("Enter the psid of the new plan you would like: "))
-        except:
-            logging.error("invalid non-integer psid entered")
-            sys.exit()
+        if args.psid is not None:
+            chosen_psid = args.psid
+        else:
+            try:
+                chosen_psid = int(input("Enter the psid of the new plan you would like: "))
+            except:
+                logging.error("invalid non-integer psid entered")
+                sys.exit()
         r = s.post(
             "{}/confirm_service?userid={}&psid={}&unpause=0&service_id={}&upgrade_options=&discount_code=&avcid={}&locid={}&coat=".format(
                 BASE_URL,
