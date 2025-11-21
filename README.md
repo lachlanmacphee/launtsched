@@ -26,7 +26,29 @@ If you already know the `id` of the service you want to `pause`, `unpause`, or e
 
 ```sh
 python3 change_service_status.py plan --service_id 123456
+2025-10-10 17:05:22.524     INFO logging in
+2025-10-10 17:05:23.001     INFO getting services
+2025-10-10 17:05:23.543     INFO only one service detected - continuing to plan
+2025-10-10 17:05:23.881     INFO 2623: Standby(0/0) - $0.50/day
+2025-10-10 17:05:23.881     INFO 2613: nbn100/20(100/20) - $3.30/day
+2025-10-10 17:05:23.881     INFO 2608: nbn100/40(100/40) - $3.80/day
+2025-10-10 17:05:23.881     INFO 2669: Home Fast(500/50) - $3.50/day
+2025-10-10 17:05:23.881     INFO 2615: Home SuperFast(750/50) - $4.00/day
+2025-10-10 17:05:23.881     INFO 2617: #FastAF-100(1000/100) - $4.20/day
+2025-10-10 17:05:23.882     INFO 2664: nbn250/100(250/100) - $3.80/day
+2025-10-10 17:05:23.882     INFO 2666: #CrankIt(2000/100) - $6.00/day
+2025-10-10 17:05:23.882     INFO 2629: IoT 1Mbps(1/1) - $1.80/day
+2025-10-10 17:05:23.882     INFO 2635: IoT 4Mbps(4/4) - $2.50/day
+Enter the psid of the new plan you would like: 
 ```
+
+For non-interactive plan changes, you can specify the plan speed ID (`psid`) directly:
+
+```sh
+python3 change_service_status.py plan --service_id 123456 --psid 2669
+```
+
+To find available plan IDs and prices, run the script in interactive mode first (without `--psid`).
 
 ## How do you schedule this?
 

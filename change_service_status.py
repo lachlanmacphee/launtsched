@@ -31,6 +31,13 @@ def parse_args():
         required=False,
         type=int,
     )
+    parser.add_argument(
+        "--psid",
+        metavar="psid",
+        help="plan speed id for non-interactive plan changes (only used with `plan` action)",
+        required=False,
+        type=int,
+    )
     return parser.parse_args()
 
 
@@ -137,15 +144,20 @@ if __name__ == "__main__":
         speed_choices = soup.find_all("span", class_="list-group-item")
         for choice in speed_choices:
             col_values = choice.find_all("div", class_="col-sm-4")
+            plan_name = col_values[0].text.strip()
+            price = col_values[2].text.strip() if len(col_values) > 2 else "N/A"
             logging.info(
-                str(choice.get("data-value")) + ": " + col_values[0].text.strip()
+                str(choice.get("data-value")) + ": " + plan_name + " - " + price
             )
         chosen_service_locid = soup.find("input", {"name": "locid"}).get("value")
-        try:
-            chosen_psid = int(input("Enter the psid of the new plan you would like: "))
-        except:
-            logging.error("invalid non-integer psid entered")
-            sys.exit()
+        if args.psid is not None:
+            chosen_psid = args.psid
+        else:
+            try:
+                chosen_psid = int(input("Enter the psid of the new plan you would like: "))
+            except:
+                logging.error("invalid non-integer psid entered")
+                sys.exit()
         r = s.post(
             "{}/confirm_service?userid={}&psid={}&unpause=0&service_id={}&upgrade_options=&discount_code=&avcid={}&locid={}&coat=".format(
                 BASE_URL,
