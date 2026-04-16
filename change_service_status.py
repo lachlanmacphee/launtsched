@@ -143,7 +143,7 @@ if __name__ == "__main__":
         soup = BeautifulSoup(r.text, "html.parser")
         speed_choices = soup.find_all("span", class_="list-group-item")
         for choice in speed_choices:
-            col_values = choice.find_all("div", class_="col-sm-4")
+            col_values = choice.find_all("div", class_="col-sm-3")
             plan_name = col_values[0].text.strip()
             price = col_values[2].text.strip() if len(col_values) > 2 else "N/A"
             logging.info(
